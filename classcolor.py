@@ -14,7 +14,7 @@ class colors:
 	reverse='\033[07m'
 	strikethrough='\033[09m'
 	invisible='\033[08m'
-	class fg: 
+	class fore: 
 			black='\033[30m'
 			red='\033[31m'
 			green='\033[32m'
@@ -30,7 +30,7 @@ class colors:
 			lightblue='\033[94m'
 			pink='\033[95m'
 			lightcyan='\033[96m'
-	class bg: 
+	class back: 
 			black='\033[40m'
 			red='\033[41m'
 			green='\033[42m'
@@ -40,5 +40,5 @@ class colors:
 			cyan='\033[46m'
 			lightgrey='\033[47m'
 
-print(colors.bg.green, "SKk", colors.fg.red, "Amartya") 
-print(colors.bg.lightgrey, "SKk", colors.fg.red, "Amartya") 
+# print(colors.back.green, "SKk", colors.fore.red, "Amartya") 
+# print(colors.back.lightgrey, "SKk", colors.fore.red, "Amartya") 

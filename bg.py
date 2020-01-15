@@ -1,8 +1,10 @@
 import numpy
 
 class bg:
-	sky = '^'
-	ground = '*'
+	sky = '\033[94m^\033[0m'
+	ground = '\033[32m*\033[0m'
+	coin = '\033[01m\033[93m$\033[0m'
+	danger = '\033[01m\033[41m\033[30m!\033[0m'
 	def __init__(self,rows,cols):
 		self.__rows = rows
 		self.__cols = cols
@@ -28,7 +30,11 @@ class bg:
 				elif self.screen[i][j] == ord("_"):
 					print("_",end='')
 				elif self.screen[i][j] == ord("."):
-					print(".",end='')			
+					print(".",end='')
+				elif self.screen[i][j] == 6:
+					print(self.danger,end='')
+				elif self.screen[i][j] == 99:
+					print(self.coin,end='')			
 			print('\\')
 	def printonly(self,start):
 		for i in range(self.__rows):
@@ -49,7 +55,9 @@ class bg:
 				elif self.screen[i][j] == ord("."):
 					print(".",end='')
 				elif self.screen[i][j] == 6:
-					print("!",end='')
+					print(self.danger,end='')
+				elif self.screen[i][j] == 99:
+					print(self.coin,end='')	
 			print('\\')
 	# def image(self):
 	# 	mat = self.screen
