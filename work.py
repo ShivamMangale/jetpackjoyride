@@ -30,7 +30,8 @@ class checker:
 		else:	return 1
 
 	def limit(self, lim, x):
-		pass
+		if x < lim:		return 1
+		else:			return 0
 	
 	def domove(self, screen, move, start, x, y, l, b):
 		for i in range(x,x+3):
@@ -49,3 +50,20 @@ class checker:
 				screen[i][j] = self.looks[i - x][j - y]
 
 		return x, y
+
+	def down(self, screen, start, x, y, l, b, grav):
+		if self.limit(l-4,x)	== 1:
+			if grav == 1:
+				for i in range(x,x+3):
+					for j in range(y,y+3):
+						screen[i][j] = ord(" ")
+
+				x += 1
+
+				for i in range(x,x+3):
+					for j in range(y,y+3):
+						screen[i][j] = self.looks[i - x][j - y]
+			else:
+				grav = 1
+
+		return x, y, grav
