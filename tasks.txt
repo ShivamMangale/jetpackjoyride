@@ -1,30 +1,35 @@
 5 points
 *add speedup token
 15 points
-*add final screen if possible(rescuing yoda or something)
 *add enemy and big enemy
-3 points
-*alter lives and score
-*enable coin increase score
+*add final screen if possible(rescuing yoda or something)
+	3 points
+	*alter lives and score
+	*display score and lives
+	*enable coin increase score
 15 points
 *inheritance
 *polymorphism
 *abstraction
-10 points
-*shield
+	10 points
+	*shield
 5 points
 *apply colors to stuff
 15 points
 *magnet
-10 points
-*enable fire beam damage
+	10 points
+	*enable fire beam damage
 2 points
 *enable shooting
-*better input(problem:once it starts going down it doesnt go up)
-some points/brownie points
+	*better input(problem:once it starts going down it doesnt go up)
+*some points/brownie points
 *clean code
 
 
-current expected marks: 25
+current expected marks: 45
 
 *dragon or some attempt for partial bonus marks atleast
+
+
+*instead of giving the self.looks you can swap hero
+*check constraint limits everywhere(like checker for collision)
