@@ -41,3 +41,4 @@ class obstacles:
 				screen[loc][start + i] = obst[0][i]
 
 		return loc, start
+		

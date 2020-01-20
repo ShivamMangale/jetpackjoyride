@@ -43,3 +43,5 @@ current expected marks: 50
 *change color of screen in fast mode
 *change size of steps in speedup
 *give health bar to enemy on top of him as a array representing blocks of life
+*can optimize by only doing en.move() after 900
+*use variables instead of constants
