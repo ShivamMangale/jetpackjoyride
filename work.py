@@ -4,7 +4,7 @@ class checker:
 	looks = [[ord("-"), ord(" "), ord("-")],
 				  [ord(" "), ord("."), ord(" ")],
 				  [ord("_"), ord(" "), ord("_")]]
-
+				  
 	def __init__(self):
 		pass
 

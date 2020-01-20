@@ -32,13 +32,28 @@ class bg:
 					print("_",end='')
 				elif self.screen[i][j] == ord("."):
 					print(".",end='')
+				elif self.screen[i][j] == ord("["):
+					print("[",end='')
+				elif self.screen[i][j] == ord(":"):
+					print(":",end='')
+				elif self.screen[i][j] == ord("]"):
+					print("]",end='')
+				elif self.screen[i][j] == ord("+"):
+					print("+",end='')
 				elif self.screen[i][j] == ord("|"):
 					print("|",end='')
+				elif self.screen[i][j] == ord("@"):
+					print("@",end='')
+				elif self.screen[i][j] == ord("e"):
+					print("e",end='')
+				elif self.screen[i][j] == ord("S"):
+					print("S",end='')
 				elif self.screen[i][j] == 6:
 					print(self.danger,end='')
 				elif self.screen[i][j] == 99:
 					print(self.coin,end='')			
 			print('\\')
+			
 	def printonly(self,start,shield):
 		for i in range(self.__rows):
 			for j in range(start,min(start+100,self.__cols)):
@@ -63,8 +78,28 @@ class bg:
 					print("\033[44m_\033[0m",end='')
 				elif shield == 1 and self.screen[i][j] == ord("."):
 					print("\033[44m.\033[0m",end='')
+				elif self.screen[i][j] == ord("["):
+					print("[",end='')
+				elif self.screen[i][j] == ord(":"):
+					print(":",end='')
+				elif self.screen[i][j] == ord("]"):
+					print("]",end='')
+				elif self.screen[i][j] == ord("+"):
+					print("+",end='')
 				elif self.screen[i][j] == ord("|"):
 					print("|",end='')
+				elif self.screen[i][j] == ord("@"):
+					print("@",end='')
+				elif self.screen[i][j] == ord("e"):
+					print("e",end='')
+				elif self.screen[i][j] == ord("m"):
+					print("m",end='')
+				elif self.screen[i][j] == ord("a"):
+					print("a",end='')
+				elif self.screen[i][j] == ord("g"):
+					print("g",end='')
+				elif self.screen[i][j] == ord("S"):
+					print("\033[34mS\033[0m",end='')
 				elif self.screen[i][j] == 6:
 					print(self.danger,end='')
 				elif self.screen[i][j] == 99:
