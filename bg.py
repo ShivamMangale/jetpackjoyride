@@ -6,6 +6,11 @@ class bg:
 	coin = '\033[01m\033[93m$\033[0m'
 	danger = '\033[01m\033[41m\033[30m!\033[0m'
 	blueforshield = '\033[44m'
+	herobullet = '\033[96m@\033[0m'
+	enemybullet = '\033[33me\033[0m'
+	mmag = '\033[40m\033[31mm\033[0m'
+	amag = '\033[40m\033[31ma\033[0m'
+	gmag = '\033[40m\033[31mg\033[0m'
 	def __init__(self,rows,cols):
 		self.__rows = rows
 		self.__cols = cols
@@ -43,11 +48,11 @@ class bg:
 				elif self.screen[i][j] == ord("|"):
 					print("|",end='')
 				elif self.screen[i][j] == ord("@"):
-					print("@",end='')
+					print(self.herobullet,end='')
 				elif self.screen[i][j] == ord("e"):
-					print("e",end='')
+					print(self.enemybullet,end='')
 				elif self.screen[i][j] == ord("S"):
-					print("S",end='')
+					print("\033[34mS\033[0m",end='')
 				elif self.screen[i][j] == 6:
 					print(self.danger,end='')
 				elif self.screen[i][j] == 99:
@@ -89,15 +94,15 @@ class bg:
 				elif self.screen[i][j] == ord("|"):
 					print("|",end='')
 				elif self.screen[i][j] == ord("@"):
-					print("@",end='')
+					print(self.herobullet,end='')
 				elif self.screen[i][j] == ord("e"):
-					print("e",end='')
+					print(self.enemybullet,end='')
 				elif self.screen[i][j] == ord("m"):
-					print("m",end='')
+					print(self.mmag,end='')
 				elif self.screen[i][j] == ord("a"):
-					print("a",end='')
+					print(self.amag,end='')
 				elif self.screen[i][j] == ord("g"):
-					print("g",end='')
+					print(self.gmag,end='')
 				elif self.screen[i][j] == ord("S"):
 					print("\033[34mS\033[0m",end='')
 				elif self.screen[i][j] == 6:
@@ -105,9 +110,9 @@ class bg:
 				elif self.screen[i][j] == 99:
 					print(self.coin,end='')	
 			print('\\')
-	# def image(self):
-	# 	mat = self.screen
-	# 	return mat
+	
+	def getscreen(self):
+		return self.screen
 
-# a = bg(3,3)
-# a.printall()
+	def setscreen(self, upd):
+		self.screen = upd

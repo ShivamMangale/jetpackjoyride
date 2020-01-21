@@ -1,52 +1,58 @@
 from person import person
+from mando import mando
 import time
 
 class enemy(person):
-	def __init__(self, screen, x, y, timeofstart):
+	def __init__(self, board, x, y, timeofstart):
 		super().__init__(x,y,5)
-		self.looks = [[ord("+"), ord(":"), ord("+")],
+		screen = board.getscreen()
+		self.__looks = [[ord("+"), ord(":"), ord("+")],
 					  [ord("["), ord(":"), ord("]")],
 					  [ord("["), ord(":"), ord("]")]]
 		for i in range(x,x+3):
 			for j in range(y,y+3):
-				screen[i][j] = self.looks[i-x][j-y]
-		self.enemybullet = []
-		self.reachedenemy = -1
-		self.timeforenemybullet = timeofstart + 100000
+				screen[i][j] = self.__looks[i-x][j-y]
+		self.__enemybullet = []
+		self.__reachedenemy = -1
+		self.__timeforenemybullet = timeofstart + 100000
+		board.setscreen(screen)
 
-	def move(self, screen, x, b):
+	def move(self, board, x, b):
+		screen = board.getscreen()
 		b -= 4
-		while self.x != x:
-			for i in range(self.x,self.x+3):
+		while self._x != x:
+			for i in range(self._x,self._x+3):
 				for j in range(b,b+3):
 					screen[i][j] = ord(" ")
-			if self.x < x:		self.x += 1
-			else:			self.x -= 1
+			if self._x < x:		self._x += 1
+			else:			self._x -= 1
 
-			for i in range(self.x,self.x+3):
+			for i in range(self._x,self._x+3):
 				for j in range(b,b+3):
-					screen[i][j] = self.looks[i - self.x][j - b]
+					screen[i][j] = self.__looks[i - self._x][j - b]
 
-		return self.x
+		return self._x
+		board.setscreen(screen)
 
 	def enemyreached(self):
-		if self.reachedenemy == -1:
-			self.reachedenemy = 1
-			self.timeforenemybullet = time.time()
+		if self.__reachedenemy == -1:
+			self.__reachedenemy = 1
+			self.__timeforenemybullet = time.time()
 
 	def checkifenemyshoot(self):
-		if time.time() - self.timeforenemybullet > 1:
-			for i in range(1):
-				self.enemybullet.append([self.x + i, self.y - 1])
-			self.timeforenemybullet = time.time()
+		if time.time() - self.__timeforenemybullet > 1:
+			for i in range(3):
+				self.__enemybullet.append([self._x + i, self._y - 1])
+			self.__timeforenemybullet = time.time()
 
-	def updatebullets(self, screen, x, y, shield):
+	def updatebullets(self, hero, board):
+		screen = board.getscreen()
 		hurt = 0
-		for i in self.enemybullet:
+		for i in self.__enemybullet:
 			if i[1] > 900:
-				if x <= i[0] and x + 3 > i[0]:
-					if y <= i[1] and y + 3 > i[1]:
-						if shield == -1:
+				if hero.getx() <= i[0] and hero.getx() + 3 > i[0]:
+					if hero.gety() <= i[1] and hero.gety() + 3 > i[1]:
+						if hero.getflagshield() == -1:
 							hurt += 1
 						screen[i[0]][i[1]] = ord(" ")
 						i[0], i[1] = 0, 0
@@ -56,4 +62,5 @@ class enemy(person):
 			else:
 				i[0], i[1] = 20, 100
 
-		return hurt
+		hero.setlives(hero.getlives() - hurt)
+		board.setscreen(screen)

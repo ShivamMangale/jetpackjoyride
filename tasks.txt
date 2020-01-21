@@ -2,32 +2,31 @@
 	*add speedup token
 15 points
 	*add enemy
-*add final screen if possible(rescuing yoda or something)
 	3 points
 	*alter lives and score
 	*display score and lives
 	*enable coin increase score
-15 points
-*inheritance
-*polymorphism
-*abstraction
-*make all info private
-*use getters and setters
-*make functions if possible in respective classes
-*implement better inheritance
+	15 points
+	*inheritance
+	*polymorphism
+	*abstraction
+	*make all info private
+	*use getters and setters
+	*make functions if possible in respective classes
+	*implement better inheritance
 	10 points
 	*shield
-5 points
-*apply colors to stuff
-15 points
-*magnet
+	5 points
+	*apply colors to stuff
+	15 points
+	*magnet
 	10 points
 	*enable fire beam damage
-2 points
+	2 points
 	*enable shooting
 	*better input(problem:once it starts going down it doesnt go up)
-*some points/brownie points
-*clean code
+	*some points/brownie points
+	*clean code
 
 
 current expected marks: 50
@@ -45,3 +44,5 @@ current expected marks: 50
 *give health bar to enemy on top of him as a array representing blocks of life
 *can optimize by only doing en.move() after 900
 *use variables instead of constants
+*make all obstacles a class object
+*add final screen if possible(rescuing yoda or something)
