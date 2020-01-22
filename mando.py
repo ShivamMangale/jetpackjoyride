@@ -47,6 +47,7 @@ class mando(person):
 							for j in range(max(start,shots[1]-7),min(min(start+100,shots[1]+7),b)):
 								if screen[i][j] == "!":
 									screen[i][j] = " "
+						self.__score += 10
 						screen[shots[0]][shots[1]] = " "
 						shots[0],shots[1] = b + 100, b + 100
 					elif screen[shots[0]][shots[1] + 1] == "$" or screen[shots[0]][shots[1] + 2] == "$" or screen[shots[0]][shots[1] + 3] == "$":
@@ -57,10 +58,10 @@ class mando(person):
 								for j in range(i,i+3):
 									screen[shots[0]][j] = " "
 						shots[0],shots[1] = b + 100, b + 100
-					elif screen[shots[0]][shots[1] + 1] == "+" or screen[shots[0]][shots[1] + 2] == "+" or screen[shots[0]][shots[1] + 3] == "+" or screen[shots[0]][shots[1] + 1] == "[" or screen[shots[0]][shots[1] + 2] == "[" or screen[shots[0]][shots[1] + 3] == "[" :
-						hurt += 1
-						screen[shots[0]][shots[1]] = " "
-						shots[0], shots[1] = b + 100,b + 100
+					# elif screen[shots[0]][shots[1] + 1] == "+" or screen[shots[0]][shots[1] + 2] == "+" or screen[shots[0]][shots[1] + 3] == "+" or screen[shots[0]][shots[1] + 1] == "[" or screen[shots[0]][shots[1] + 2] == "[" or screen[shots[0]][shots[1] + 3] == "[" :
+					# 	hurt += 1
+					# 	screen[shots[0]][shots[1]] = " "
+					# 	shots[0], shots[1] = b + 100,b + 100
 					elif screen[shots[0]][shots[1] + 1] == "S" or screen[shots[0]][shots[1] + 2] == "S" or screen[shots[0]][shots[1] + 3] == "S":
 						for i in range(3):
 							if screen[shots[0]][shots[1] + i + 1] == "S":
@@ -68,7 +69,7 @@ class mando(person):
 								screen[shots[0]][shots[1] + i + 1] = " "
 						screen[shots[0]][shots[1]] = " "						
 						shots[0], shots[1] = b + 100,b + 100
-					else:
+					elif screen[shots[0]][shots[1] + 1] == " " or screen[shots[0]][shots[1] + 2] == " " or screen[shots[0]][shots[1] + 3] == " ":
 						screen[shots[0]][shots[1]] = " "
 						screen[shots[0]][shots[1] + 1] = " "
 						screen[shots[0]][shots[1] + 2] = " "
@@ -77,6 +78,10 @@ class mando(person):
 						if shots[1] > start + 100:	
 							screen[shots[0]][shots[1]] = " "
 							shots[0], shots[1] = b + 100,b + 100
+					else:
+						hurt += 1
+						screen[shots[0]][shots[1]] = " "
+						shots[0], shots[1] = b + 100,b + 100
 				elif shots[1] != b + 100:
 					screen[shots[0]][shots[1]] = " "
 					shots[0], shots[1] = b + 100,b + 100
@@ -93,7 +98,7 @@ class mando(person):
 			self.__flagshield = -1
 			self.__timeofshieldend = time.time()
 			self.__shieldable = 0
-		elif time.time() - self.__timeofshieldend > 10:
+		elif time.time() - self.__timeofshieldend > 60:
 			self.__shieldable = 1
 
 	def dochange(self, screen, x, y, l, b):
@@ -106,7 +111,7 @@ class mando(person):
 		if self.__flagshield == 1:	diff = 0
 		self._lives -= diff
 
-	def domove(self, screen, move, start, l, b):
+	def domove(self, screen, move, start, l, b, en):
 		for i in range(self._x, self._x + 3):
 			for j in range(self._y, self._y + 3):
 				screen[i][j] = " "
@@ -117,6 +122,8 @@ class mando(person):
 		elif move == 1:
 			self._y += 2
 			self._y = min(start + 100 - 4,self._y)
+			if self._y >= en.gety() - 1:
+				self._y = en.gety() - 4
 		elif move == 2:
 			self._y -= 2
 		
@@ -171,14 +178,16 @@ class mando(person):
 	def getspeedup(self):
 		return self.__speedup
 
-	def checkmagnet(self, screen, start, l, b, movemap, magx, magy):
+	def checkmagnet(self, screen, start, l, b, movemap, magx, magy, en):
 		if start <= magy and magy < start + 100:
 			mag = ['m', 'a', 'g']
 			for i in range(3):
 				screen[magx][magy + i + 1] = " "
 				screen[magx][magy + i] = mag[i]
 			if self.gety() <= magy:
-				self.domove(screen, movemap['d'], start, l, b)
+				self.domove(screen, movemap['d'], start, l, b, en)
 			else:
-				self.domove(screen, movemap['a'], start, l, b)
-		
+				self.domove(screen, movemap['a'], start, l, b, en)
+	
+	def setscore(self,upd):
+		self.__score += upd

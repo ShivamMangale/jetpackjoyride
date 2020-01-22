@@ -22,7 +22,7 @@ hero = mando(board,l-4,3)
 obst = obstacles(board, l, b)
 maglocx, maglocy = obst.magnet(board, l, b)
 speedx, speedy = obst.speed(board, l, b)
-en = enemy(board, l-4, b-4, timeofstart)
+en = enemy(board, l-10, b-25, timeofstart)
 
 os.system("clear")
 def alarmhandler(signum, frame):
@@ -44,7 +44,7 @@ def user_input(timeout=0.1):
 
 col = 0
 
-while col<1000 and hero.getlives() > 0 and en.getlives() > 0:
+while col<1000 and hero.getlives() > 0 and en.getlives() > 0 and time.time() - timeofstart < 100:
 	seconds = time.time()
 
 	print("Score: ", hero.getscore()) 
@@ -53,7 +53,7 @@ while col<1000 and hero.getlives() > 0 and en.getlives() > 0:
 	print("\033[%d;%dH" % (0, 0))
 	board.printonly(col,hero.getflagshield())
 
-	while hero.gety() <= col + hero.getspeedup():	hero.domove(board.getscreen(), movemap['d'], col, l, min(col+100,b))
+	while hero.gety() <= col + hero.getspeedup():	hero.domove(board.getscreen(), movemap['d'], col, l, min(col+100,b), en)
 
 
 	if col < 900:
@@ -77,7 +77,7 @@ while col<1000 and hero.getlives() > 0 and en.getlives() > 0:
 	hero.updatebullets(en, board.getscreen(), col, l, b)
 
 	for i in range(int((hero.getspeedup()+1)/2)):
-		hero.domove(board.getscreen(), movemap[move], col, l, min(col+100,b))
+		hero.domove(board.getscreen(), movemap[move], col, l, min(col+100,b), en)
 
 	hero.gravity(board.getscreen(), col, l, min(col + 100,b), move)
 
@@ -90,11 +90,13 @@ while col<1000 and hero.getlives() > 0 and en.getlives() > 0:
 		
 	en.updatebullets(hero, board)
 
-	en.move(board, hero.getx(), b)
+	en.move(board, hero.getx(), l, b)
 
-	hero.checkmagnet(board.getscreen(), col, l, min(col+100,b), movemap, maglocx, maglocy)
+	hero.checkmagnet(board.getscreen(), col, l, min(col+100,b), movemap, maglocx, maglocy, en)
+
 os.system("clear")
 if en.getlives() == 0:
+	hero.setscore(100)
 	fin = finalscreen()
 	print("\033[%d;%dH" % (0, 0))
 	fin.printit()

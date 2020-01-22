@@ -63,7 +63,9 @@ class bg:
 				elif self.screen[i][j] == "!":
 					print(self.danger,end='')
 				elif self.screen[i][j] == "$":
-					print(self.coin,end='')			
+					print(self.coin,end='')
+				else:
+					print(self.screen[i][j],end='')		
 			print()
 			
 	def printonly(self,start,shield):
@@ -128,7 +130,15 @@ class bg:
 				elif self.screen[i][j] == "!":
 					print(self.danger,end='')
 				elif self.screen[i][j] == "$":
-					print(self.coin,end='')	
+					print(self.coin,end='')
+				elif self.screen[i][j] == "=":
+					print("\033[31m~\033[0m",end='')
+				elif self.screen[i][j] == "&":
+					print("\033[31m/\033[0m",end='')
+				else:
+					print('\033[31m',end='')
+					print(self.screen[i][j],end='')
+					print('\033[0m',end='')
 			print()
 	
 	def getscreen(self):

@@ -6,11 +6,11 @@ class finalscreen:
 ::::::-:.`'..`'.:-::::::::
 ::::::::\ `--' /::::::::::
 ------------------------------
-,adPPYba, 88       88  ,adPPYba,  ,adPPYba,  ,adPPYba, ,adPPYba, ,adPPYba,  
-I8[    "" 88       88 a8"     "" a8"     "" a8P_____88 I8[    "" I8[    ""  
- `"Y8ba,  88       88 8b         8b         8PP"""""""  `"Y8ba,   `"Y8ba,   
-aa    ]8I "8a,   ,a88 "8a,   ,aa "8a,   ,aa "8b,   ,aa aa    ]8I aa    ]8I  
-`"YbbdP"'  `"YbbdP'Y8  `"Ybbd8"'  `"Ybbd8"'  `"Ybbd8"' `"YbbdP"' `"YbbdP"'
+___ _   _  ___ ___ ___  ___ ___ 
+/ __| | | |/ __/ __/ _ \/ __/ __|
+\__ \ |_| | (_| (_|  __/\__ \__ \
+
+|___/\__,_|\___\___\___||___/___/
 """.split("\n")
 
 	def printit(self):

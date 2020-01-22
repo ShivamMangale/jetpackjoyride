@@ -16,8 +16,8 @@ Coins ($) if shot at or on contact are collected to increase the hero's score.
 A speed token on contact or shot at increase the speed of the game for a set amount of time.
 
 The shield when enabled(10 secs) makes the hero invincible to enemy bullets and damage from beams. Refresh time 60s.
-A magnet is spawned randomly which strongly attracts the hero when in its range. A "mag" is used to show its presence.
+A magnet is spawned randomly which strongly attracts the hero when in its range. A "mag" is used to show its presence.The magnet only attracts along the x-axis.
 
 
-The boss enemy is met at the end and he shoots bullets at the hero while adjusting him to the hero's position.
+The boss enemy, the dragon is met at the end and he shoots bullets at the hero while adjusting him to the hero's position.
 To rescue yoda you have to defeat the boss enemy.

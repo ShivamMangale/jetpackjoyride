@@ -1,36 +1,37 @@
 from person import person
 from mando import mando
+from dragon import dragon
 import time
 
 class enemy(person):
 	def __init__(self, board, x, y, timeofstart):
 		super().__init__(x,y,5)
 		screen = board.getscreen()
-		self.__looks = [["+", ":", "+"],
-					    ["[", ":", "]"],
-					    ["[", ":", "]"]]
-		for i in range(x,x+3):
-			for j in range(y,y+3):
-				screen[i][j] = self.__looks[i-x][j-y]
+		self.__image = dragon().looks
+		self.__max = 0
+		self.__looks = self.__image.split("\n")
+		for i in range(len(self.__looks)):
+			self.__max = max(self.__max, len(self.__looks))
+		for i in range(len(self.__looks)):
+			for j in range(self.__max):
+				screen[x + i][y + j] = self.__looks[i][j]
 		self.__enemybullet = []
 		self.__reachedenemy = -1
 		self.__timeforenemybullet = timeofstart + 100000
 		board.setscreen(screen)
 
-	def move(self, board, x, b):
+	def move(self, board, x, l, b):
 		screen = board.getscreen()
 		b -= 4
-		while self._x != x:
-			for i in range(self._x,self._x+3):
-				for j in range(b,b+3):
-					screen[i][j] = " "
-			if self._x < x:		self._x += 1
-			else:			self._x -= 1
-
-			for i in range(self._x,self._x+3):
-				for j in range(b,b+3):
-					screen[i][j] = self.__looks[i - self._x][j - b]
-
+		for i in range(len(self.__looks)):
+			for j in range(self.__max + 6):
+				screen[self._x + i][self._y + j] = " "
+		self._x = x
+		self._x = min(self._x, l - 10)
+		for i in range(len(self.__looks)):
+			for j in range(self.__max + 6):
+				screen[self._x + i][self._y + j] = self.__looks[i][j]
+	
 		return self._x
 		board.setscreen(screen)
 
@@ -41,8 +42,9 @@ class enemy(person):
 
 	def checkifenemyshoot(self):
 		if time.time() - self.__timeforenemybullet > 1:
-			for i in range(3):
+			for i in range(len(self.__looks)):
 				self.__enemybullet.append([self._x + i, self._y - 1])
+				i += 1
 			self.__timeforenemybullet = time.time()
 
 	def updatebullets(self, hero, board):
