@@ -1,6 +1,6 @@
 	5 points
 	*add speedup token
-15 points
+	15 points
 	*add enemy
 	3 points
 	*alter lives and score
@@ -31,18 +31,20 @@
 
 current expected marks: 50
 
+*readjust the dimensions of everythin according to the requirements.
+
 *dragon or some attempt for partial bonus marks atleast
 *give permanent effect magnet and shield button
 *add ascii art for dragon
-*add gravity effect(increment number of function calls)
-*handle collision of hero's and enemy's bullets
+	*add gravity effect(increment number of function calls)
+																			*handle collision of hero's and enemy's bullets
 *check all requirements met in moodle forum
-*instead of giving the self.looks you can swap hero
-*check constraint limits everywhere(like checker for collision)
-*change color of screen in fast mode
+																			*instead of giving the self.looks you can swap hero
+																			*check constraint limits everywhere(like checker for collision)
+																			*change color of screen in fast mode
 *change size of steps in speedup
-*give health bar to enemy on top of him as a array representing blocks of life
-*can optimize by only doing en.move() after 900
-*use variables instead of constants
-*make all obstacles a class object
-*add final screen if possible(rescuing yoda or something)
+																			*give health bar to enemy on top of him as a array representing blocks of life
+																			*can optimize by only doing en.move() after 900
+																			*use variables instead of constants
+	*make all obstacles a class object
+	*add final screen if possible(rescuing yoda or something)

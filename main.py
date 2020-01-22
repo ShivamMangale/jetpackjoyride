@@ -9,9 +9,9 @@ from alarmexception import AlarmException
 import sys 
 import time
 from enemy import enemy
+from finalscreen import finalscreen
 
 movemap = {'w': 0, 'd': 1, 'a': 2, 'q': -1, 'p': 5, '':-10, ' ':100}
-# up,right,left,quit,shoot,everything else,shield
 
 l = 40
 b = 1000
@@ -22,7 +22,7 @@ hero = mando(board,l-4,3)
 obst = obstacles(board, l, b)
 maglocx, maglocy = obst.magnet(board, l, b)
 speedx, speedy = obst.speed(board, l, b)
-en = enemy(board, l-4, b-4, timeofstart)
+en = enemy(board, l-20, b-30, timeofstart)
 
 os.system("clear")
 def alarmhandler(signum, frame):
@@ -44,17 +44,12 @@ def user_input(timeout=0.1):
 
 col = 0
 
-print("Seconds since epoch =", timeofstart)	
-
-
 while col<1000 and hero.getlives() > 0 and en.getlives() > 0:
 	seconds = time.time()
 
 	print("Score: ", hero.getscore()) 
-	print("Hero's lives: ", str(hero.getlives()).zfill(2))
+	print("Hero's lives: ", str(hero.getlives())," and Enemy's lives: ", en.getlives())
 	print("Time elapsed: ", round(seconds - timeofstart,2))
-	print("Col: ", col)
-	print("Enemy's lives: ", en.getlives())
 	print("\033[%d;%dH" % (0, 0))
 	board.printonly(col,hero.getflagshield())
 
@@ -68,7 +63,7 @@ while col<1000 and hero.getlives() > 0 and en.getlives() > 0:
 
 	move = user_input()
 
-	if move not in movemap.keys():	move = ''#handles all other keys
+	if move not in movemap.keys():	move = ''
 
 	if movemap[move] == -1:	
 		print("Quitting")
@@ -107,5 +102,9 @@ while col<1000 and hero.getlives() > 0 and en.getlives() > 0:
 		else:
 			hero.domove(board.getscreen(), movemap['a'], col, l, min(col+100,b))
 
+if en.getlives() == 0:
+	fin = finalscreen()
+	print("\033[%d;%dH" % (0, 0))
+	fin.printit()
 
 print("Done")

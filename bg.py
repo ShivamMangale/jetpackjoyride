@@ -57,7 +57,7 @@ class bg:
 					print(self.danger,end='')
 				elif self.screen[i][j] == 99:
 					print(self.coin,end='')			
-			print('\\')
+			print()
 			
 	def printonly(self,start,shield):
 		for i in range(self.__rows):
@@ -109,7 +109,7 @@ class bg:
 					print(self.danger,end='')
 				elif self.screen[i][j] == 99:
 					print(self.coin,end='')	
-			print('\\')
+			print()
 	
 	def getscreen(self):
 		return self.screen

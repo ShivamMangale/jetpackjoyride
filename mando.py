@@ -66,6 +66,7 @@ class mando(person):
 							if screen[shots[0]][shots[1] + i + 1] == ord("S"):
 								self.isspeed(self._x, self._y)
 								screen[shots[0]][shots[1] + i + 1] = ord(" ")
+						screen[shots[0]][shots[1]] = ord(" ")						
 						shots[0], shots[1] = b + 100,b + 100
 					else:
 						screen[shots[0]][shots[1]] = ord(" ")
@@ -131,12 +132,14 @@ class mando(person):
 	
 	def down(self, screen, start, l, b):
 		if self.limit(l-4,self._x)	== 1:
-			if self.__grav == 1:
+			if self.__grav:
 				for i in range(self._x,self._x+3):
 					for j in range(self._y,self._y+3):
 						screen[i][j] = ord(" ")
 
-				self._x += 1
+				self._x += int(self.__grav/2)
+				self.__grav += 1
+				self._x = min(self._x, l-4)
 
 				for i in range(self._x,self._x+3):
 					for j in range(self._y,self._y+3):
@@ -151,9 +154,9 @@ class mando(person):
 	def gravity(self, screen, start, l, b, move):	
 		if move != 'w':	
 			self.__grav = self.down(screen, start, l, b)
-			if self.__grav == 1 and self._x == l-4:	
+			if not self.__grav and self._x == l-4:	
 				self.__grav = 0
-		elif move == 'w' and self.__grav == 1:
+		elif move == 'w' and self.__grav:
 			self.__grav = 0
 
 	def getflagshield(self):
