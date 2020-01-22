@@ -93,7 +93,7 @@ while col<1000 and hero.getlives() > 0 and en.getlives() > 0:
 	en.move(board, hero.getx(), b)
 
 	hero.checkmagnet(board.getscreen(), col, l, min(col+100,b), movemap, maglocx, maglocy)
-
+os.system("clear")
 if en.getlives() == 0:
 	fin = finalscreen()
 	print("\033[%d;%dH" % (0, 0))
@@ -101,5 +101,5 @@ if en.getlives() == 0:
 else:
 	print("\033[%d;%dH" % (0, 0))
 	print("GAME OVER")
-		
+
 print("Done")

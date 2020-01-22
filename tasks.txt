@@ -34,7 +34,7 @@ current expected marks: 50
 *readjust the dimensions of everythin according to the requirements.
 
 *dragon or some attempt for partial bonus marks atleast
-*give permanent effect magnet and shield button
+	*give permanent effect magnet and shield button
 *add ascii art for dragon
 	*add gravity effect(increment number of function calls)
 																			*handle collision of hero's and enemy's bullets

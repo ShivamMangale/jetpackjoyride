@@ -17,4 +17,5 @@ class dragon:
 # 	print()
 
 dr = dragon()
-print(len(list(dr.looks)))
+drag = dr.looks.split("\n")
+print(len(drag))

@@ -5,12 +5,12 @@ class mando(person):
 	def __init__(self, board, x, y):
 		super().__init__(x,y,10)
 		screen = board.getscreen()
-		self.__looks = [[ord("-"), ord(" "), ord("-")],
-					  [ord(" "), ord("."), ord(" ")],
-					  [ord("_"), ord(" "), ord("_")]]
+		self.__looks = [["#", "T", "#"],
+					  	["|", "|", ">"],
+					  	["/", "|", "\\"]]
 		self.__score = 0
-		self.__invalid = 6
-		self.__coin = 99
+		self.__invalid = "!"
+		self.__coin = "$"
 		for i in range(x,x+3):
 			for j in range(y,y+3):
 				screen[i][j] = self.__looks[i - x][j - y]
@@ -42,43 +42,43 @@ class mando(person):
 		for i in range(self.__speedup):	
 			for shots in self.__bullets:
 				if shots[1] < b-3:
-					if screen[shots[0]][shots[1] + 1] == 6 or screen[shots[0]][shots[1] + 2] == 6 or screen[shots[0]][shots[1] + 3] == 6:
+					if screen[shots[0]][shots[1] + 1] == "!" or screen[shots[0]][shots[1] + 2] == "!" or screen[shots[0]][shots[1] + 3] == "!":
 						for i in range(max(2,shots[0]-7),min(l-2,shots[0]+7)):
 							for j in range(max(start,shots[1]-7),min(min(start+100,shots[1]+7),b)):
-								if screen[i][j] == 6:
-									screen[i][j] = ord(" ")
-						screen[shots[0]][shots[1]] = ord(" ")
+								if screen[i][j] == "!":
+									screen[i][j] = " "
+						screen[shots[0]][shots[1]] = " "
 						shots[0],shots[1] = b + 100, b + 100
-					elif screen[shots[0]][shots[1] + 1] == 99 or screen[shots[0]][shots[1] + 2] == 99 or screen[shots[0]][shots[1] + 3] == 99:
-						screen[shots[0]][shots[1]] = ord(" ")
+					elif screen[shots[0]][shots[1] + 1] == "$" or screen[shots[0]][shots[1] + 2] == "$" or screen[shots[0]][shots[1] + 3] == "$":
+						screen[shots[0]][shots[1]] = " "
 						self.__score += 3
 						for i in range(shots[1] + 1,shots[1] + 4):
-							if screen[shots[0]][i] == 99:
+							if screen[shots[0]][i] == "$":
 								for j in range(i,i+3):
-									screen[shots[0]][j] = ord(" ")
+									screen[shots[0]][j] = " "
 						shots[0],shots[1] = b + 100, b + 100
-					elif screen[shots[0]][shots[1] + 1] == ord("+") or screen[shots[0]][shots[1] + 2] == ord("+") or screen[shots[0]][shots[1] + 3] == ord("+") or screen[shots[0]][shots[1] + 1] == ord("[") or screen[shots[0]][shots[1] + 2] == ord("[") or screen[shots[0]][shots[1] + 3] == ord("["):
+					elif screen[shots[0]][shots[1] + 1] == "+" or screen[shots[0]][shots[1] + 2] == "+" or screen[shots[0]][shots[1] + 3] == "+" or screen[shots[0]][shots[1] + 1] == "[" or screen[shots[0]][shots[1] + 2] == "[" or screen[shots[0]][shots[1] + 3] == "[" :
 						hurt += 1
-						screen[shots[0]][shots[1]] = ord(" ")
+						screen[shots[0]][shots[1]] = " "
 						shots[0], shots[1] = b + 100,b + 100
-					elif screen[shots[0]][shots[1] + 1] == ord("S") or screen[shots[0]][shots[1] + 2] == ord("S") or screen[shots[0]][shots[1] + 3] == ord("S"):
+					elif screen[shots[0]][shots[1] + 1] == "S" or screen[shots[0]][shots[1] + 2] == "S" or screen[shots[0]][shots[1] + 3] == "S":
 						for i in range(3):
-							if screen[shots[0]][shots[1] + i + 1] == ord("S"):
+							if screen[shots[0]][shots[1] + i + 1] == "S":
 								self.isspeed(self._x, self._y)
-								screen[shots[0]][shots[1] + i + 1] = ord(" ")
-						screen[shots[0]][shots[1]] = ord(" ")						
+								screen[shots[0]][shots[1] + i + 1] = " "
+						screen[shots[0]][shots[1]] = " "						
 						shots[0], shots[1] = b + 100,b + 100
 					else:
-						screen[shots[0]][shots[1]] = ord(" ")
-						screen[shots[0]][shots[1] + 1] = ord(" ")
-						screen[shots[0]][shots[1] + 2] = ord(" ")
-						screen[shots[0]][shots[1] + 3] = ord("@")
+						screen[shots[0]][shots[1]] = " "
+						screen[shots[0]][shots[1] + 1] = " "
+						screen[shots[0]][shots[1] + 2] = " "
+						screen[shots[0]][shots[1] + 3] = "@"
 						shots[1] = shots[1] + 3
 						if shots[1] > start + 100:	
-							screen[shots[0]][shots[1]] = ord(" ")
+							screen[shots[0]][shots[1]] = " "
 							shots[0], shots[1] = b + 100,b + 100
 				elif shots[1] != b + 100:
-					screen[shots[0]][shots[1]] = ord(" ")
+					screen[shots[0]][shots[1]] = " "
 					shots[0], shots[1] = b + 100,b + 100
 
 		en.setlives(en.getlives() - hurt)
@@ -100,8 +100,8 @@ class mando(person):
 		diff = 0
 		for i in range(max(x-6,4), min(x+6,l-4)):
 			for j in range(max(0,y-7), min(b,y+7)):
-				if screen[i][j] == 6:
-					screen[i][j] = ord(" ")
+				if screen[i][j] == "!":
+					screen[i][j] = " "
 					diff = 1
 		if self.__flagshield == 1:	diff = 0
 		self._lives -= diff
@@ -109,11 +109,11 @@ class mando(person):
 	def domove(self, screen, move, start, l, b):
 		for i in range(self._x, self._x + 3):
 			for j in range(self._y, self._y + 3):
-				screen[i][j] = ord(" ")
+				screen[i][j] = " "
 		
 		if move == 0:
 			self._x -= 2
-			self._x = max(2,self._x)
+			self._x = max(3,self._x)
 		elif move == 1:
 			self._y += 2
 			self._y = min(start + 100 - 4,self._y)
@@ -135,7 +135,7 @@ class mando(person):
 			if self.__grav:
 				for i in range(self._x,self._x+3):
 					for j in range(self._y,self._y+3):
-						screen[i][j] = ord(" ")
+						screen[i][j] = " "
 
 				self._x += int(self.__grav/2)
 				self.__grav += 1
@@ -173,12 +173,12 @@ class mando(person):
 
 	def checkmagnet(self, screen, start, l, b, movemap, magx, magy):
 		if start <= magy and magy < start + 100:
-			mag = [ord('m'), ord('a'), ord('g')]
+			mag = ['m', 'a', 'g']
 			for i in range(3):
-				screen[magx][magy + i + 1] = ord(" ")
+				screen[magx][magy + i + 1] = " "
 				screen[magx][magy + i] = mag[i]
 			if self.gety() <= magy:
 				self.domove(screen, movemap['d'], start, l, b)
 			else:
 				self.domove(screen, movemap['a'], start, l, b)
-
+		

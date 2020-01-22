@@ -2,6 +2,7 @@ import numpy
 
 class bg:
 	sky = '\033[94m^\033[0m'
+	skytil = '\033[94m~\033[0m'
 	ground = '\033[32m*\033[0m'
 	coin = '\033[01m\033[93m$\033[0m'
 	danger = '\033[01m\033[41m\033[30m!\033[0m'
@@ -12,50 +13,56 @@ class bg:
 	amag = '\033[40m\033[31ma\033[0m'
 	gmag = '\033[40m\033[31mg\033[0m'
 	def __init__(self,rows,cols):
-		self.__rows = rows
+		self.__rows = rows + 2
 		self.__cols = cols
-		self.screen = numpy.zeros(shape=(rows,cols))
+		self.screen = numpy.full((rows + 2,cols),' ')
 		for i in range(self.__cols):
-			self.screen[0][i] = -1
-			self.screen[self.__rows - 1][i] = -2
+			self.screen[0][i] = '^'
+			self.screen[1][i] = "~"
+			self.screen[2][i] = '^'
+			self.screen[self.__rows - 3][i] = '*'
+			self.screen[self.__rows - 2][i] = '*'
+			self.screen[self.__rows - 1][i] = '*'
+
 
 	def printall(self):
 		for i in range(self.__rows):
 			for j in range(self.__cols):
-				if self.screen[i][j] == 0:
+				if self.screen[i][j] == " ":
 					print(' ',end='')
-				elif self.screen[i][j] == -1:
+				elif self.screen[i][j] == '^':
 					print(self.sky,end='')
-					# print(j%10,end='')
-				elif self.screen[i][j] == -2:
+				elif self.screen[i][j] == "~":
+					print(self.skytil,end='')
+				elif self.screen[i][j] == '*':
 					print(self.ground,end='')
-				elif self.screen[i][j] == ord(" "):
+				elif self.screen[i][j] == " ":
 					print(" ",end='')
-				elif self.screen[i][j] == ord("-"):
+				elif self.screen[i][j] == "-":
 					print("-",end='')
-				elif self.screen[i][j] == ord("_"):
+				elif self.screen[i][j] == "_":
 					print("_",end='')
-				elif self.screen[i][j] == ord("."):
-					print(".",end='')
-				elif self.screen[i][j] == ord("["):
+				elif self.screen[i][j] == "o":
+					print("o",end='')
+				elif self.screen[i][j] == "[":
 					print("[",end='')
-				elif self.screen[i][j] == ord(":"):
+				elif self.screen[i][j] == ":":
 					print(":",end='')
-				elif self.screen[i][j] == ord("]"):
+				elif self.screen[i][j] == "]":
 					print("]",end='')
-				elif self.screen[i][j] == ord("+"):
+				elif self.screen[i][j] == "+":
 					print("+",end='')
-				elif self.screen[i][j] == ord("|"):
+				elif self.screen[i][j] == "|":
 					print("|",end='')
-				elif self.screen[i][j] == ord("@"):
+				elif self.screen[i][j] == "@":
 					print(self.herobullet,end='')
-				elif self.screen[i][j] == ord("e"):
+				elif self.screen[i][j] == "e":
 					print(self.enemybullet,end='')
-				elif self.screen[i][j] == ord("S"):
+				elif self.screen[i][j] == "S":
 					print("\033[34mS\033[0m",end='')
-				elif self.screen[i][j] == 6:
+				elif self.screen[i][j] == "!":
 					print(self.danger,end='')
-				elif self.screen[i][j] == 99:
+				elif self.screen[i][j] == "$":
 					print(self.coin,end='')			
 			print()
 			
@@ -64,50 +71,63 @@ class bg:
 			for j in range(start,min(start+100,self.__cols)):
 				if self.screen[i][j] == 0:
 					print(' ',end='')
-				elif self.screen[i][j] == -1:
+				elif self.screen[i][j] == '^':
 					print(self.sky,end='')
-					# print(j%10,end='')
-				elif self.screen[i][j] == -2:
+				elif self.screen[i][j] == "~":
+					print(self.skytil,end='')
+				elif self.screen[i][j] == '*':
 					print(self.ground,end='')
-				elif self.screen[i][j] == ord(" "):
+				elif self.screen[i][j] == " ":
 					print(" ",end='')
-				elif shield == -1 and self.screen[i][j] == ord("-"):
-					print("\033[40m-\033[0m",end='')
-				elif shield == -1 and self.screen[i][j] == ord("_"):
-					print("\033[40m_\033[0m",end='')
-				elif shield == -1 and self.screen[i][j] == ord("."):
-					print("\033[40m.\033[0m",end='')
-				elif shield == 1 and self.screen[i][j] == ord("-"):
-					print("\033[44m-\033[0m",end='')
-				elif shield == 1 and self.screen[i][j] == ord("_"):
-					print("\033[44m_\033[0m",end='')
-				elif shield == 1 and self.screen[i][j] == ord("."):
-					print("\033[44m.\033[0m",end='')
-				elif self.screen[i][j] == ord("["):
+				elif shield == -1 and self.screen[i][j] == "#":
+					print("\033[40m\033[93m#\033[0m",end='')
+				elif shield == -1 and self.screen[i][j] == "|":
+					print("\033[40m\033[93m|\033[0m",end='')
+				elif shield == -1 and self.screen[i][j] == ">":
+					print("\033[40m\033[93m>\033[0m",end='')
+				elif shield == -1 and self.screen[i][j] == "\\":
+					print("\033[40m\033[93m\\\033[0m",end='')
+				elif shield == -1 and self.screen[i][j] == "/":
+					print("\033[40m\033[93m/\033[0m",end='')
+				elif shield == -1 and self.screen[i][j] == "T":
+					print("\033[40m\033[93mT\033[0m",end='')
+				elif shield == 1 and self.screen[i][j] == "#":
+					print("\033[44m#\033[0m",end='')
+				elif shield == 1 and self.screen[i][j] == "|":
+					print("\033[44m\033[93m|\033[0m",end='')
+				elif shield == 1 and self.screen[i][j] == ">":
+					print("\033[44m\033[93m>\033[0m",end='')
+				elif shield == 1 and self.screen[i][j] == "/":
+					print("\033[44m\033[93m/\033[0m",end='')
+				elif shield == 1 and self.screen[i][j] == "T":
+					print("\033[44m\033[93mT\033[0m",end='')
+				elif shield == 1 and self.screen[i][j] == "\\":
+					print("\033[44m\033[93m\\\033[0m",end='')
+				elif self.screen[i][j] == "[":
 					print("[",end='')
-				elif self.screen[i][j] == ord(":"):
+				elif self.screen[i][j] == ":":
 					print(":",end='')
-				elif self.screen[i][j] == ord("]"):
+				elif self.screen[i][j] == "]":
 					print("]",end='')
-				elif self.screen[i][j] == ord("+"):
+				elif self.screen[i][j] == "+":
 					print("+",end='')
-				elif self.screen[i][j] == ord("|"):
+				elif self.screen[i][j] == "|":
 					print("|",end='')
-				elif self.screen[i][j] == ord("@"):
+				elif self.screen[i][j] == "@":
 					print(self.herobullet,end='')
-				elif self.screen[i][j] == ord("e"):
+				elif self.screen[i][j] == "e":
 					print(self.enemybullet,end='')
-				elif self.screen[i][j] == ord("m"):
+				elif self.screen[i][j] == "m":
 					print(self.mmag,end='')
-				elif self.screen[i][j] == ord("a"):
+				elif self.screen[i][j] == "a":
 					print(self.amag,end='')
-				elif self.screen[i][j] == ord("g"):
+				elif self.screen[i][j] == "g":
 					print(self.gmag,end='')
-				elif self.screen[i][j] == ord("S"):
+				elif self.screen[i][j] == "S":
 					print("\033[34mS\033[0m",end='')
-				elif self.screen[i][j] == 6:
+				elif self.screen[i][j] == "!":
 					print(self.danger,end='')
-				elif self.screen[i][j] == 99:
+				elif self.screen[i][j] == "$":
 					print(self.coin,end='')	
 			print()
 	
