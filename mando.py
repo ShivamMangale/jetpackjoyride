@@ -170,3 +170,15 @@ class mando(person):
 
 	def getspeedup(self):
 		return self.__speedup
+
+	def checkmagnet(self, screen, start, l, b, movemap, magx, magy):
+		if start <= magy and magy < start + 100:
+			mag = [ord('m'), ord('a'), ord('g')]
+			for i in range(3):
+				screen[magx][magy + i + 1] = ord(" ")
+				screen[magx][magy + i] = mag[i]
+			if self.gety() <= magy:
+				self.domove(screen, movemap['d'], start, l, b)
+			else:
+				self.domove(screen, movemap['a'], start, l, b)
+

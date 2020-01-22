@@ -22,7 +22,7 @@ hero = mando(board,l-4,3)
 obst = obstacles(board, l, b)
 maglocx, maglocy = obst.magnet(board, l, b)
 speedx, speedy = obst.speed(board, l, b)
-en = enemy(board, l-20, b-30, timeofstart)
+en = enemy(board, l-4, b-4, timeofstart)
 
 os.system("clear")
 def alarmhandler(signum, frame):
@@ -91,20 +91,15 @@ while col<1000 and hero.getlives() > 0 and en.getlives() > 0:
 	en.updatebullets(hero, board)
 
 	en.move(board, hero.getx(), b)
-		
-	if col <= maglocy and maglocy < col + 100:
-		mag = [ord('m'), ord('a'), ord('g')]
-		for i in range(3):
-			board.screen[maglocx][maglocy - col + 1] = ord(" ")
-			board.screen[maglocx][maglocy - col] = mag[i]
-		if hero.gety() <= maglocy:
-			hero.domove(board.getscreen(), movemap['d'], col, l, min(col+100,b))
-		else:
-			hero.domove(board.getscreen(), movemap['a'], col, l, min(col+100,b))
+
+	hero.checkmagnet(board.getscreen(), col, l, min(col+100,b), movemap, maglocx, maglocy)
 
 if en.getlives() == 0:
 	fin = finalscreen()
 	print("\033[%d;%dH" % (0, 0))
 	fin.printit()
-
+else:
+	print("\033[%d;%dH" % (0, 0))
+	print("GAME OVER")
+		
 print("Done")

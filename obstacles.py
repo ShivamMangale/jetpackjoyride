@@ -1,4 +1,5 @@
 import random
+from mando import mando
 from beam import beam
 from coin import coin
 from magnet import magnet
