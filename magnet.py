@@ -10,3 +10,6 @@ class magnet():
 
 	def getmagy(self):
 		return self.__y
+
+	def getmagz(self):
+		return self.__y
