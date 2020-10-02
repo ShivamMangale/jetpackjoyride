@@ -42,6 +42,19 @@ def user_input(timeout=0.1):
     signal.signal(signal.SIGALRM, signal.SIG_IGN)
     return ''
 
+def user_input1(timeout=0.1213):
+    ''' input method '''
+    signal.signal(signal.SIGALRM, alarmhandler)
+    signal.setitimer(signal.ITIMER_REAL, timeout)
+    try:
+        text = getChar()()
+        signal.alarm(0)
+        return text
+    except AlarmException:
+        pass
+    signal.signal(signal.SIGALRM, signal.SIG_IGN)
+    return ''
+
 col = 0
 
 while col<1000 and hero.getlives() > 0 and en.getlives() > 0 and time.time() - timeofstart < 100:
